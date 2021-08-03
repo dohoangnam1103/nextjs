@@ -1,7 +1,6 @@
 import Head from "next/head";
 
-function Page({ data }) {
-  console.log(data.data[0].first_name);
+function Page({ data, id }) {
   return (
     <div>
       <Head>
@@ -29,18 +28,19 @@ function Page({ data }) {
       </Head>
 
       <div>hello {data.data[0].first_name}</div>
+      <div>param id {id}</div>
     </div>
   );
 }
 
 // This gets called on every request
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   // Fetch data from external API
   const res = await fetch(`https://reqres.in/api/users?page=2`);
   const data = await res.json();
 
   // Pass data to the page via props
-  return { props: { data } };
+  return { props: { data, id: context.params?.id } };
 }
 
 export default Page;
