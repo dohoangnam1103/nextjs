@@ -23,7 +23,11 @@ export default function Home() {
         </p>
 
         <Link href="/about">
-          <a>About</a>
+          <a>go to About</a>
+        </Link>
+
+        <Link href="/demostore">
+          <a>go to Store</a>
         </Link>
 
        

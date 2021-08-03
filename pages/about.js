@@ -1,9 +1,20 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import Link from 'next/link'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+import Link from "next/link";
 
-export default function Home() {
+export default function About({ data }) {
+  const list = data.data.map((element) => {
+    const link = `/article/${element.email}`
+    return (
+      <div key={element.id}>
+        <Link href={ link }>
+          <a>{element.email}</a>
+        </Link>
+      </div>
+    );
+  });
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,14 +24,16 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-            about page
-        </h1>
+        <h1 className={styles.title}>about page</h1>
 
         <Link href="/">
-          <a>home</a>
+          <a>go to home</a>
         </Link>
-       
+
+        <div>
+          <h2>list</h2>
+          {list}
+        </div>
       </main>
 
       <footer className={styles.footer}>
@@ -29,12 +42,21 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
+}
+
+export async function getStaticProps(context) {
+  // Fetch data from external API
+  const res = await fetch(`https://reqres.in/api/users?page=2`);
+  const data = await res.json();
+
+  // Pass data to the page via props
+  return { props: { data } };
 }
