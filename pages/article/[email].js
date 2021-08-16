@@ -36,8 +36,11 @@ function Page({ article }) {
         <p>content from server</p>
         <div>hello {JSON.stringify(article)}</div>
         <div>param id {article.id}</div>
+        <div>param id {article.avatar}</div>
 
+        {/* <Image src={profilePic} width="300px" height="450px" object-fit="cover" alt="Picture of the author" /> */}
         <Image src={profilePic} width="300px" height="450px" object-fit="cover" alt="Picture of the author" />
+        <img src={article.avatar} />
       </div>
     </div>
   );
