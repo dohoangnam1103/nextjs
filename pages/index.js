@@ -3,7 +3,21 @@ import Image from "next/image";
 import styles from "../styles/Home.module.scss";
 import Link from "next/link";
 
+export function getServerSideProps() {
+  console.log(process.env.NODE_ENV)
+  console.log(process.env.SECRET_VARIABLE)
+  console.log(process.env.NEXT_PUBLIC_MY_FIRST_BROWSERVARIABLE)
+
+  return {
+    props: {}
+  }
+}
+
 export default function Home() {
+  console.log(process.env.NODE_ENV)
+  console.log(process.env.SECRET_VARIABLE)
+  console.log(process.env.NEXT_PUBLIC_MY_FIRST_BROWSERVARIABLE)
+  
   return (
     <div className={styles.container}>
       <Head>
